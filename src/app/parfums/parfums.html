@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        @if(parfums.length!=0){
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Marque</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+          </tr>
+        </thead>
+        } @for(parfum of parfums;track parfum.marqueParfum;let index =$index;let nbr=$count;let
+        first = $first;let last=$last){
+        <tbody>
+          <tr>
+            <td>{{ index + 1 }}</td>
+            <td>{{ parfum.marqueParfum }}</td>
+            <td>{{ parfum.nomParfum }}</td>
+            <td>{{ parfum.prixParfum }}</td>
+            <td>{{ parfum.contenanceParfum }}</td>
+            <td><a class="btn btn-danger" (click)="supprimerParfum(parfum)">supprimer</a></td>
+ <td><a class="btn btn-success" [routerLink]="['/updateParfum',parfum.nomParfum]">Modifier</a></td>             
+          </tr>
+        </tbody>
+      }
+      </table>
+    </div>
+  </div>
+</div>

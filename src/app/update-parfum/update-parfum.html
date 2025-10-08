@@ -1,0 +1,35 @@
+<div class="container">
+  <div>
+    <h2>Modifier un Parfum :</h2>             
+  </div>
+
+  <form #parfumForm="ngForm">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Marque Parfum</label>
+      <input type="text" [(ngModel)]="currentParfum.marqueParfum" 
+             name="marqueParfum" class="form-control" required>
+    </div>
+ 
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Parfum</label>
+      <input type="text" [(ngModel)]="currentParfum.nomParfum" 
+             name="nomParfum" class="form-control" required>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Prix Parfum</label>
+      <input type="number" [(ngModel)]="currentParfum.prixParfum" 
+             name="prixParfum" class="form-control" required>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Contenance Parfum</label>
+      <input type="text" [(ngModel)]="currentParfum.contenanceParfum" 
+             name="contenanceParfum" class="form-control">
+    </div>
+    
+    <div class="mt-2">
+      <button type="button" (click)="updateParfum()" class="btn btn-success">Modifier</button>
+    </div>  
+  </form>
+</div>
