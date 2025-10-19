@@ -61,3 +61,4 @@ For more information on using the Angular CLI, including detailed command refere
 "# Parfum1" 
 "# catParfum" 
 "# genreParf" 
+"# rechercheParfum" 
