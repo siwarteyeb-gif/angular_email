@@ -1,44 +1,143 @@
-<div class="container">
+<div class="container mt-5">
   <div>
     <h2>Ajouter un Parfum :</h2>
   </div>
-  <form>
-    <div class="col-sm-2 col-md-2 col-lg-2">
+
+  <form [formGroup]="parfumForm">
+    @if (err) {
+      <div class="alert alert-danger">
+        <strong>{{ err }}</strong>
+      </div>
+    }
+
+    <!-- ID -->
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <label>Id</label>
+      <input
+        type="number"
+        formControlName="idParfum"
+        class="form-control"
+        placeholder="Entrez l'identifiant du parfum"
+      />
+      @if (parfumForm.controls['idParfum'].hasError('required') && parfumForm.controls['idParfum'].touched) {
+        <small class="text-danger">⚠️ Ce champ est obligatoire</small>
+      }
+    </div>
+
+    <!-- Marque -->
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
       <label>Marque Parfum</label>
       <input
         type="text"
-        [(ngModel)]="newParfum.marqueParfum"
-        name="marqueParfum"
+        formControlName="marqueParfum"
         class="form-control"
+        placeholder="Entrez la marque du parfum"
       />
+      @if (parfumForm.controls['marqueParfum'].hasError('required') && parfumForm.controls['marqueParfum'].touched) {
+        <small class="text-danger">⚠️ Ce champ est obligatoire</small>
+      }
     </div>
 
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <!-- Nom -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
       <label>Nom Parfum</label>
-      <input type="text" [(ngModel)]="newParfum.nomParfum" name="nomParfum" class="form-control" />
+      <input
+        type="text"
+        formControlName="nomParfum"
+        class="form-control"
+        placeholder="Entrez le nom du parfum"
+      />
+      @if (parfumForm.controls['nomParfum'].hasError('required') && parfumForm.controls['nomParfum'].touched) {
+        <small class="text-danger">⚠️ Ce champ est obligatoire</small>
+      }
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2">
+
+    <!-- Prix -->
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
       <label>Prix Parfum</label>
       <input
         type="number"
-        [(ngModel)]="newParfum.prixParfum"
-        name="prixProduit"
+        formControlName="prixParfum"
         class="form-control"
+        placeholder="Entrez le prix du parfum"
       />
+      @if (parfumForm.controls['prixParfum'].hasError('required') && parfumForm.controls['prixParfum'].touched) {
+        <small class="text-danger">⚠️ Ce champ est obligatoire</small>
+      }
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-      <label>contenance</label>
+
+    <!-- Contenance -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label>Contenance</label>
       <input
         type="text"
-        [(ngModel)]="newParfum.contenanceParfum"
-        name="contenanceParfum"
+        formControlName="contenanceParfum"
         class="form-control"
+        placeholder="Entrez la contenance du parfum"
+      />
+      @if (parfumForm.controls['contenanceParfum'].hasError('required') && parfumForm.controls['contenanceParfum'].touched) {
+        <small class="text-danger">⚠️ Ce champ est obligatoire</small>
+      }
+    </div>
+
+    <!-- ✅ Email -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label>Email :</label>
+      <input
+        type="text"
+        name="email"
+        class="form-control"
+        formControlName="email"
       />
     </div>
-    <div class="mt-2">
-      <button type="submit" (click)="addParfum()" class="btn btn-success">Ajouter</button>
-      <div>
-        <h3>{{ message }}</h3>
+
+    @if (parfumForm.controls['email'].hasError('required') && parfumForm.controls['email'].touched) {
+      <span class="text-danger">email est obligatoire</span>
+    }
+    @if (parfumForm.controls['email'].hasError('email') && parfumForm.controls['email'].touched) {
+      <span class="text-danger">email non valide</span>
+    }
+
+    <!-- Genre -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label>Genre</label>
+      <select
+        class="form-control form-control-lg"
+        id="idGen"
+        name="idGen"
+        formControlName="idGen"
+      >
+        <option value="">-- Sélectionnez un genre --</option>
+        @for (gen of genres; track gen.idGen) {
+          <option [value]="gen.idGen">{{ gen.nomGen }}</option>
+        }
+      </select>
+      @if (parfumForm.controls['idGen'].hasError('required') && parfumForm.controls['idGen'].touched) {
+        <small class="text-danger">⚠️ Ce champ est obligatoire</small>
+      }
+    </div>
+
+    <!-- Loading -->
+    @if (loading) {
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    }
+
+    <!-- Bouton -->
+    <div class="mt-3">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="addParfum()"
+        [disabled]="parfumForm.invalid"
+      >
+        Ajouter
+      </button>
+      <div class="mt-2">
+        <h3 class="text-success">{{ message }}</h3>
       </div>
     </div>
   </form>
